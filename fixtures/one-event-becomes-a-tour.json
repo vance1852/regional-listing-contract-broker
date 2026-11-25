@@ -1,0 +1,212 @@
+{
+  "facts": {
+    "subscriptions": [
+      {
+        "id": "county-calendar",
+        "groups": [
+          "public"
+        ],
+        "publishers": [
+          "north"
+        ],
+        "generation": 1,
+        "protocol": "v1"
+      },
+      {
+        "id": "library-map",
+        "groups": [
+          "public",
+          "reading-room"
+        ],
+        "publishers": [
+          "north",
+          "south"
+        ],
+        "generation": 4,
+        "protocol": "v2"
+      },
+      {
+        "id": "southern-station",
+        "groups": [
+          "public"
+        ],
+        "publishers": [
+          "south"
+        ],
+        "generation": 2,
+        "protocol": "v1"
+      }
+    ]
+  },
+  "events": [
+    {
+      "at": 540,
+      "kind": "publish",
+      "publisher": "north",
+      "key": "choir",
+      "revision": 1,
+      "source_offset": 31,
+      "protocol": "v1",
+      "active": [
+        545,
+        720
+      ],
+      "venue": {
+        "id": "hall",
+        "address": "檐廊10号",
+        "hours": [
+          600,
+          625
+        ],
+        "groups": [
+          "public"
+        ]
+      }
+    },
+    {
+      "at": 545,
+      "kind": "receipt",
+      "partner": "county-calendar",
+      "generation": 1,
+      "source_offset": 31,
+      "state": "consumed"
+    },
+    {
+      "at": 548,
+      "kind": "publish",
+      "publisher": "north",
+      "key": "choir",
+      "revision": 2,
+      "source_offset": 32,
+      "protocol": "v2",
+      "active": [
+        550,
+        800
+      ],
+      "stops": [
+        {
+          "id": "hall",
+          "address": "檐廊10号",
+          "hours": [
+            600,
+            625
+          ],
+          "groups": [
+            "public"
+          ]
+        },
+        {
+          "id": "yard",
+          "address": "石巷3号",
+          "hours": [
+            658,
+            685
+          ],
+          "groups": [
+            "public"
+          ],
+          "staff_note": "南侧收音"
+        },
+        {
+          "id": "annex",
+          "address": "内部附室",
+          "hours": [
+            690,
+            704
+          ],
+          "groups": [
+            "reading-room"
+          ]
+        }
+      ]
+    },
+    {
+      "at": 555,
+      "kind": "upgrade",
+      "partner": "county-calendar",
+      "generation": 2,
+      "protocol": "v2",
+      "from_source_offset": 31,
+      "backfill": true
+    },
+    {
+      "at": 556,
+      "kind": "withdraw_stop",
+      "publisher": "north",
+      "key": "choir",
+      "revision": 3,
+      "source_offset": 33,
+      "stop": "annex"
+    },
+    {
+      "at": 559,
+      "kind": "receipt",
+      "partner": "county-calendar",
+      "generation": 1,
+      "source_offset": 32,
+      "state": "consumed"
+    },
+    {
+      "at": 570,
+      "kind": "history",
+      "partner": "county-calendar",
+      "after": 30,
+      "before": 34
+    },
+    {
+      "at": 574,
+      "kind": "receipt",
+      "partner": "county-calendar",
+      "generation": 2,
+      "source_offset": 33,
+      "state": "consumed"
+    }
+  ],
+  "exchanges": [
+    {
+      "method": "POST",
+      "path": "/partners/county-calendar/delivery",
+      "match": {
+        "generation": 1
+      },
+      "status": 202,
+      "response": {
+        "accepted": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/partners/county-calendar/delivery",
+      "match": {
+        "generation": 1
+      },
+      "status": 202,
+      "response": {
+        "accepted": true
+      },
+      "drop": true
+    },
+    {
+      "method": "POST",
+      "path": "/partners/library-map/delivery",
+      "match": {
+        "generation": 4
+      },
+      "status": 202,
+      "response": {
+        "accepted": true
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/partners/county-calendar/delivery",
+      "match": {
+        "generation": 2
+      },
+      "status": 202,
+      "response": {
+        "accepted": true
+      }
+    }
+  ]
+}

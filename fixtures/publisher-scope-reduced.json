@@ -1,0 +1,106 @@
+{
+  "facts": {
+    "subscriptions": [
+      {
+        "id": "city-tv",
+        "groups": [
+          "public",
+          "library"
+        ],
+        "publishers": [
+          "north",
+          "south"
+        ],
+        "generation": 8,
+        "protocol": "v2"
+      }
+    ]
+  },
+  "events": [
+    {
+      "at": 580,
+      "kind": "publish",
+      "publisher": "south",
+      "key": "reading",
+      "revision": 1,
+      "source_offset": 70,
+      "protocol": "v2",
+      "active": [
+        580,
+        690
+      ],
+      "stops": [
+        {
+          "id": "court",
+          "address": "白墙院",
+          "hours": [
+            632,
+            657
+          ],
+          "groups": [
+            "public"
+          ]
+        },
+        {
+          "id": "shelf",
+          "address": "阅览室",
+          "hours": [
+            648,
+            660
+          ],
+          "groups": [
+            "library"
+          ]
+        }
+      ]
+    },
+    {
+      "at": 590,
+      "kind": "receipt",
+      "partner": "city-tv",
+      "generation": 8,
+      "source_offset": 70,
+      "state": "consumed"
+    },
+    {
+      "at": 598,
+      "kind": "scope",
+      "partner": "city-tv",
+      "publishers": [
+        "south"
+      ],
+      "groups": [
+        "public"
+      ]
+    },
+    {
+      "at": 600,
+      "kind": "history",
+      "partner": "city-tv",
+      "after": 68,
+      "before": 71
+    },
+    {
+      "at": 611,
+      "kind": "withdraw_stop",
+      "publisher": "south",
+      "key": "reading",
+      "revision": 2,
+      "source_offset": 71,
+      "stop": "court"
+    }
+  ],
+  "exchanges": [
+    {
+      "method": "POST",
+      "path": "/partners/city-tv/delivery",
+      "match": {
+        "generation": 8
+      },
+      "status": 202,
+      "response": {
+        "accepted": true
+      }
+    }
+  ]
+}
